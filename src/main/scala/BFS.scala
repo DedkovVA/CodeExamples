@@ -12,7 +12,7 @@ object BFS {
     val GRAY = "GRAY"
     val BLACK = "BLACK"
 
-    val INF = 9999
+    val INF = -1
 
     case class BFSNode(id: String, idList: List[String], w: Int, color: String)
 
@@ -25,7 +25,7 @@ object BFS {
 
     val graph: RDD[BFSNode] = whiteGraph.map(e => {
       if (e.id == exploredId) {
-        e.copy(w = -1, color = GRAY)
+        e.copy(color = GRAY)
       } else {
         e
       }
@@ -67,7 +67,7 @@ object BFS {
 
         bfs(grayListUpd, graph1, r)
       } else {
-        val stillWhite = graph.filter(_.color == WHITE).map(e => (e.id, 0)).collect().toMap
+        val stillWhite = graph.filter(_.color == WHITE).map(e => (e.id, INF)).collect().toMap
         result ++ stillWhite
       }
     }

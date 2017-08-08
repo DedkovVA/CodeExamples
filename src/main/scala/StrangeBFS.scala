@@ -9,7 +9,7 @@ object StrangeBFS {
     val GRAY = "GRAY"
     val BLACK = "BLACK"
 
-    val INF = 9999
+    val INF = -1
 
     case class BFSNode(id: String, idList: List[String], w: Int, color: String)
 
@@ -22,7 +22,7 @@ object StrangeBFS {
 
     var graph = whiteGraph.map(e => {
       if (e.id == exploredId) {
-        e.copy(w = -1, color = GRAY)
+        e.copy(color = GRAY)
       } else {
         e
       }
